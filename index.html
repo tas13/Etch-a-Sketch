@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Etch-a-Sketch</title>
+
+</head>
+<body>
+
+   <h1>
+        Etch-a-Sketch
+  </h1>
+  
+  <button id="1">Clear</button>
+  <div id="container"></div>
+
+  <script>
+        let startGrid = 16;
+        let gridSize = 0;
+    
+        
+        
+        function createGrid(gridSize) {
+            let container = document.querySelector('#container');
+            let number = gridSize;
+            let height = window.innerHeight;
+            let realHeight = height/number;
+    
+            for (let i = 0; i < number; i++) {
+                let row = document.createElement("div"); 
+                row.className = "row";
+                row.style.cssText = 'flat: left; clear: left';
+                for (let j = 1; j <= number; j++) {
+                    let cell = document.createElement("div"); 
+                    cell.className = "cell";
+                    cell.id = "cell"; 
+                    cell.style.cssText = 'float: left; width: ' + realHeight + 'px; height: ' + realHeight + 'px';
+                    cell.addEventListener('mouseover', (e) => {
+                        cell.style.cssText = 'background-color: black; float: left; width: ' + realHeight + 'px; height: ' + realHeight + 'px';
+                    });
+    
+                    row.appendChild(cell);
+                }
+    
+                container.appendChild(row);
+            }
+        };
+    
+        const button = document.querySelector('button');
+    
+        button.addEventListener('click', (e) => {
+          let cleaning = document.getElementById("container");
+
+          while (cleaning.firstChild) {
+           cleaning.removeChild(cleaning.firstChild);
+          }
+          gridSize = prompt("How big should the new grid be?");
+          createGrid(gridSize);
+        });
+    
+        window.onload = createGrid(startGrid);
+      </script>
+</body>
+</html>
